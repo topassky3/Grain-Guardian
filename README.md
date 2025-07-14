@@ -1,54 +1,54 @@
-☕ Sistema de Monitoreo de Fermentación de Café (SMFC)
-Este proyecto es un prototipo para monitorear las variables clave en el proceso de fermentación del café, utilizando un microcontrolador ESP32. El sistema mide la temperatura real y simula la lectura del pH para determinar el punto óptimo de fermentación y alertar al usuario.
+☕ Coffee Fermentation Monitoring System (CFMS)
+This project is a prototype for monitoring key variables in the coffee fermentation process using an ESP32 microcontroller. The system measures real temperature and simulates the pH reading to determine the optimal fermentation point and alert the user.
 
-📝 Descripción del Proyecto
-El objetivo es crear un dispositivo de bajo costo que ayude a los caficultores a estandarizar la calidad de su café. El código monitorea dos condiciones críticas para la fermentación:
+📝 Project Description
+The goal is to create a low-cost device to help coffee growers standardize the quality of their product. The code monitors two critical conditions for fermentation:
 
-Temperatura: Leída a través de un sensor DHT22.
+Temperature: Read through a DHT22 sensor.
 
-pH: Simulado mediante un potenciómetro. Esto permite probar la lógica del sistema sin necesidad de un sensor de pH real, que es más costoso y complejo de manejar.
+pH: Simulated using a potentiometer. This allows for testing the system's logic without needing a real pH sensor, which is more expensive and complex to handle.
 
-Cuando la temperatura supera los 18°C y el pH (simulado) desciende por debajo de 4.5, el sistema imprime una alerta, indicando que la fermentación ha alcanzado su punto ideal y es momento de proceder con el lavado del lote.
+When the temperature rises above 18°C and the (simulated) pH drops below 4.5, the system prints an alert, indicating that fermentation has reached its ideal point and it is time to proceed with washing the batch.
 
-⚙️ Hardware Necesario
-Microcontrolador (se recomienda ESP32 por su ADC de 12 bits).
+⚙️ Required Hardware
+Microcontroller (an ESP32 is recommended for its 12-bit ADC).
 
-Sensor de temperatura y humedad DHT22.
+DHT22 temperature and humidity sensor.
 
-Potenciómetro (cualquier valor, como 10KΩ, funciona bien).
+A Potentiometer (any value, like 10KΩ, will work well).
 
-Protoboard y cables de conexión (jumpers).
+A breadboard and connecting wires (jumpers).
 
-🚀 Cómo Funciona
-El código está estructurado en el entorno de Arduino y realiza las siguientes tareas en un bucle (loop):
+🚀 How It Works
+The code is structured for the Arduino environment and performs the following tasks in a continuous loop:
 
-Espera 2 segundos entre cada medición para no saturar el sistema.
+Waits for 2 seconds between each measurement to avoid flooding the system.
 
-Lee la temperatura en grados Celsius desde el pin 15 usando el sensor DHT22.
+Reads the temperature in Celsius from pin 15 using the DHT22 sensor.
 
-Lee el valor analógico del potenciómetro (conectado al pin 34). Este valor va de 0 a 4095.
+Reads the analog value from the potentiometer (connected to pin 34). This value ranges from 0 to 4095.
 
-Mapea (convierte) el valor del potenciómetro a un rango de pH realista (de 8.0 a 3.0). Girar la perilla simula el descenso del pH durante la fermentación.
+Maps (converts) the potentiometer's value to a realistic pH range (from 8.0 down to 3.0). Turning the knob simulates the decrease in pH during fermentation.
 
-Imprime los valores de temperatura y pH simulado en el Monitor Serial.
+Prints the temperature and simulated pH values to the Serial Monitor.
 
-Evalúa la condición de alerta: Si temperatura > 18.0 Y phSimulado < 4.5, muestra un mensaje destacado indicando que el proceso ha finalizado.
+Evaluates the alert condition: If temperature > 18.0 AND phSimulado < 4.5, it displays a prominent message indicating that the process is complete.
 
-🛠️ Instalación y Uso
-Conecta los componentes según los pines definidos en el código:
+🛠️ Setup and Usage
+Connect the components according to the pins defined in the code:
 
-Sensor DHT22 al pin 15.
+DHT22 sensor to pin 15.
 
-Potenciómetro al pin 34.
+Potentiometer to pin 34.
 
-Abre el archivo .ino en el Arduino IDE.
+Open the .ino file in the Arduino IDE.
 
-Instala la librería DHT: Ve a Herramientas > Administrar Bibliotecas... y busca e instala "DHT sensor library" by Adafruit.
+Install the DHT library: Go to Tools > Manage Libraries... and search for and install the "DHT sensor library" by Adafruit.
 
-Selecciona la placa correcta (ej. "ESP32 Dev Module") y el puerto COM en el menú Herramientas.
+Select the correct board (e.g., "ESP32 Dev Module") and COM port from the Tools menu.
 
-Sube el código a tu microcontrolador.
+Upload the code to your microcontroller.
 
-Abre el Monitor Serial (Herramientas > Monitor Serie) y configúralo a una velocidad de 115200 baudios para ver los datos en tiempo real.
+Open the Serial Monitor (Tools > Serial Monitor) and set its speed to 115200 baud to see the real-time data.
 
-Al girar el potenciómetro y calentar ligeramente el sensor, podrás simular las condiciones y ver cómo se dispara la alerta.
+By turning the potentiometer and slightly warming the sensor, you can simulate the conditions and see the alert being triggered.
